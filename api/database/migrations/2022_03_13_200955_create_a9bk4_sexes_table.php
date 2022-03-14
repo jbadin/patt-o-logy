@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSexesTable extends Migration
+class CreateA9bk4SexesTable extends Migration
 {
     /**
      * Run the migrations.

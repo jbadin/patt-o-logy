@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWeightHistoryTable extends Migration
+class CreateA9bk4WeightHistoryTable extends Migration
 {
     /**
      * Run the migrations.
