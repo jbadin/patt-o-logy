@@ -15,9 +15,13 @@ class CreateA9bk4BreedsTable extends Migration
     {
         Schema::create('a9bk4_breeds', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',100);
+            $table->string('name', 100);
             $table->text('description');
+            $table->integer('id_petsCategories')->unsigned();
             $table->timestamps();
+        });
+        Schema::table('a9bk4_breeds', function ($table) {
+            $table->foreign('id_petsCategories')->references('id')->on('a9bk4_pets_categories');
         });
     }
 
