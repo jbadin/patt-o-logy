@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth; 
+
 
 class UsersController extends Controller
 {
@@ -89,7 +90,7 @@ class UsersController extends Controller
         return response()->json($user, 200);
     }
 
-    public function delete($id)
+    public function deleteUser($id)
     {
         Users::findOrFail($id)->delete();
         return response('Supprimé.', 200);
