@@ -3,86 +3,61 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use  App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class AuthController extends Controller
 {
+    private $table = 'a9bk4_users';
+    private $errorMessages = [
+        'username.required' => 'Le nom d\'utilisateur est obligatoire',
+        'mail.required' => 'L\'adresse mail est obligatoire',
+        'mail.email' => 'L\'adresse mail n\'est pas valide',
+        'mail.unique' => 'L\'adresse mail est déjà utilisée',
+        'password.required' => 'Le mot de passe est obligatoire',
+        'password.min' => 'Le mot de passe doit contenir au moins 8 caractères',
+        'password.confirmed' => 'Les mots de passe ne correspondent pas',
+        'id_cities.required' => 'La ville est obligatoire',
+        'id_cities.integer' => 'La ville n\'est pas valide',
+    ];
 
-
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['login', 'refresh', 'logout']]);
-    }
     /**
-     * Get a JWT via given credentials.
+     * Store a new user.
      *
      * @param  Request  $request
      * @return Response
      */
-    public function login(Request $request)
+    public function register(Request $request)
     {
 
+        //validate incoming request 
         $this->validate($request, [
-            'mail' => 'required|string',
-            'password' => 'required|string',
+            'name' => 'required|string',
+            'mail' => 'required|email|unique:users',
+            'password' => 'required|confirmed',
         ]);
 
-        $credentials = $request->only(['mail', 'password']);
+        try {
+            $rules = [
+                'username' => 'required',
+                'mail' => 'required|email|unique:' . $this->table,
+                'password' => 'required|min:8|confirmed',
+                'id_cities' => 'required|integer'
+            ];
 
-        if (! $token = Auth::attempt($credentials)) {
-            return response()->json(['message' => 'Unauthorized'], 401);
+            $this->validate($request, $rules, $this->errorMessages);
+
+            $user = User::create([
+                'username' => $request->username,
+                'mail' => $request->mail,
+                'password' => Hash::make($request->password),
+                'id_cities' => $request->id_cities,
+            ]);
+
+            return response()->json($user, 201);
+        } catch (\Exception $e) {
+            //return error message
+            return response()->json(['message' => 'User Registration Failed!'], 409);
         }
-
-        return $this->respondWithToken($token);
-    }
-
-     /**
-     * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function me()
-    {
-        return response()->json(auth()->user());
-    }
-
-    /**
-     * Log the user out (Invalidate the token).
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function logout()
-    {
-        auth()->logout();
-
-        return response()->json(['message' => 'Successfully logged out']);
-    }
-
-    /**
-     * Refresh a token.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function refresh()
-    {
-        return $this->respondWithToken(auth()->refresh());
-    }
-
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function respondWithToken($token)
-    {
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'user' => auth()->user(),
-            'expires_in' => auth()->factory()->getTTL() * 60 * 24
-        ]);
     }
 }
