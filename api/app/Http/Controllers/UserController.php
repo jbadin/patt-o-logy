@@ -36,7 +36,7 @@ class UserController extends Controller
     {
         $rules = [
             'username' => 'required',
-            'mail' => 'required|email|unique:users',
+            'mail' => 'required|email|unique:usersgit sta',
             'password' => 'required|min:8|confirmed',
             'id_cities' => 'required|integer'
         ];
