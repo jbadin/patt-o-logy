@@ -18,6 +18,10 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group(['prefix' => 'api'], function () use ($router) {
+    $router->post('login', 'AuthController@login');
+    $router->post('logout', 'AuthController@logout');
+    $router->post('refresh', 'AuthController@refresh');
+    $router->post('user-profile', 'AuthController@me');
     // //Appointments
     // $router->get('rendez-vous/{id}', ['uses' => 'AppointmentsController@getAppointmentDetails']);
     // $router->get('rendez-vous/{id_users}', ['uses' => 'AppointmentsController@getAppointmentsListByUser']);
@@ -47,12 +51,12 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     // $router->put('animaux/{id}', ['uses' => 'PetsController@updatePet']);
 
     //Users
-    $router->get('users',  ['uses' => 'UsersController@getUsersList']);
-    $router->get('users/{id}', ['uses' => 'UsersController@getUserDetails']);
-    $router->post('users', ['uses' => 'UsersController@createUser']);
-    $router->put('users/profile/{id}', ['uses' => 'UsersController@updateUser']);
-    $router->put('users/password/{id}', ['uses' => 'UsersController@updateUserPassword']);
-    $router->delete('users/{id}', ['uses' => 'UsersController@deleteUser']);
+    $router->get('users',  ['uses' => 'UserController@getUsersList']);
+    $router->get('users/{id}', ['uses' => 'UserController@getUserDetails']);
+    $router->post('users', ['uses' => 'UserController@createUser']);
+    $router->put('users/profile/{id}', ['uses' => 'UserController@updateUser']);
+    $router->put('users/password/{id}', ['uses' => 'UserController@updateUserPassword']);
+    $router->delete('users/{id}', ['uses' => 'UserController@deleteUser']);
 
     // //WeightHistory
     // $router->get('poids/{id_pets}', ['uses' => 'WeightHistoryController@getWeightHistoryListByPet']);

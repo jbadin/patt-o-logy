@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 
-class HistoryTypes extends Model
+class PetGender extends Model
 {
     use Authorizable, HasFactory;
 

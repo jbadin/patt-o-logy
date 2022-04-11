@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Users;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth; 
 
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     private $table = 'a9bk4_users';
     private $errorMessages = [
@@ -25,12 +25,12 @@ class UsersController extends Controller
 
     public function getUserDetails($id)
     {
-        return response()->json(Users::find($id));
+        return response()->json(User::find($id));
     }
 
     public function getUsersList()
     {
-        return response()->json(Users::all());
+        return response()->json(User::all());
     }
 
     public function createUser(Request $request)
@@ -44,7 +44,7 @@ class UsersController extends Controller
 
         $this->validate($request, $rules, $this->errorMessages);
 
-        $user = Users::create([
+        $user = User::create([
             'username' => $request->username,
             'mail' => $request->mail,
             'password' => Hash::make($request->password),
@@ -56,7 +56,7 @@ class UsersController extends Controller
 
     public function updateUser($id, Request $request)
     {
-        $user = Users::findOrFail($id);
+        $user = User::findOrFail($id);
 
         $rules = [
             'username' => 'required',
@@ -77,7 +77,7 @@ class UsersController extends Controller
 
     public function updateUserPassword($id, Request $request)
     {
-        $user = Users::findOrFail($id);
+        $user = User::findOrFail($id);
 
         $rules = [
             'password' => 'required|confirmed|min:8',
@@ -92,7 +92,7 @@ class UsersController extends Controller
 
     public function deleteUser($id)
     {
-        Users::findOrFail($id)->delete();
+        User::findOrFail($id)->delete();
         return response('Supprimé.', 200);
     }
 }
