@@ -16,17 +16,8 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-<<<<<<< HEAD
-=======
-// $router->group(
-//     [],
-//     function () use ($router) {
-//         $router->post('login', 'AuthController@login');
-//         $router->post('logout', 'AuthController@logout');
-//     }
-// );
+
 $router->group(['prefix' => 'api'], function () use ($router) {
-    $router->post('register', 'AuthController@register');
 
     // $router->post('refresh', 'AuthController@refresh');
     // $router->post('user-profile', 'AuthController@me');
@@ -59,12 +50,12 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     // $router->put('animaux/{id}', ['uses' => 'PetsController@updatePet']);
 
     //Users
-    // $router->get('users',  ['uses' => 'UserController@getUsersList']);
-    // $router->get('users/{id}', ['uses' => 'UserController@getUserDetails']);
-    // $router->put('users/profile/{id}', ['uses' => 'UserController@updateUser']);
-    // $router->put('users/password/{id}', ['uses' => 'UserController@updateUserPassword']);
-    // $router->delete('users/{id}', ['uses' => 'UserController@deleteUser']);
-    // $router->post('users', ['uses' => 'UserController@createUser']);
+    $router->get('users',  ['uses' => 'UserController@getUsersList']);
+    $router->get('users/{id}', ['uses' => 'UserController@getUserDetails']);
+    $router->put('users/profile/{id}', ['uses' => 'UserController@updateUser']);
+    $router->put('users/password/{id}', ['uses' => 'UserController@updateUserPassword']);
+    $router->delete('users/{id}', ['uses' => 'UserController@deleteUser']);
+    $router->post('users', ['uses' => 'UserController@createUser']);
 
 
     // //WeightHistory
@@ -73,4 +64,3 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     // $router->delete('poids/{id}', ['uses' => 'WeightHistoryController@deleteWeightHistory']);
     // $router->put('poids/{id}', ['uses' => 'WeightHistoryController@updateWeightHistory']);
 });
->>>>>>> ad29c5174472ac8f41f377dd8d0d5cc5d2ab34c1
