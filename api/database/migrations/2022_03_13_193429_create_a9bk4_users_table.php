@@ -18,6 +18,7 @@ class CreateA9bk4UsersTable extends Migration
             $table->string('username',30);
             $table->string('mail',150)->unique();
             $table->string('password',60);
+            $table->rememberToken();
             //doit être en unsigned sinon une erreur d'incompatibilité va survenir
             $table->integer('id_cities')->unsigned();
             $table->timestamps();

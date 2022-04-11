@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 
-class PetsCategories extends Model
+class PetsCategory extends Model
 {
     use Authorizable, HasFactory;
 

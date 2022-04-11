@@ -2,14 +2,25 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< HEAD
 use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+=======
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth; 
+>>>>>>> ad29c5174472ac8f41f377dd8d0d5cc5d2ab34c1
 
 
 class UserController extends Controller
 {
+<<<<<<< HEAD
+=======
+    private $table = 'a9bk4_users';
+>>>>>>> ad29c5174472ac8f41f377dd8d0d5cc5d2ab34c1
     private $errorMessages = [
         'username.required' => 'Le nom d\'utilisateur est obligatoire',
         'mail.required' => 'L\'adresse mail est obligatoire',
@@ -24,12 +35,20 @@ class UserController extends Controller
 
     public function getUserDetails($id)
     {
+<<<<<<< HEAD
         return response()->json(Users::find($id));
+=======
+        return response()->json(User::find($id));
+>>>>>>> ad29c5174472ac8f41f377dd8d0d5cc5d2ab34c1
     }
 
     public function getUsersList()
     {
+<<<<<<< HEAD
         return response()->json(Users::all());
+=======
+        return response()->json(User::all());
+>>>>>>> ad29c5174472ac8f41f377dd8d0d5cc5d2ab34c1
     }
 
     public function createUser(Request $request)
@@ -43,7 +62,11 @@ class UserController extends Controller
 
         $this->validate($request, $rules, $this->errorMessages);
 
+<<<<<<< HEAD
         $user = Users::create([
+=======
+        $user = User::create([
+>>>>>>> ad29c5174472ac8f41f377dd8d0d5cc5d2ab34c1
             'username' => $request->username,
             'mail' => $request->mail,
             'password' => Hash::make($request->password),
@@ -55,7 +78,11 @@ class UserController extends Controller
 
     public function updateUser($id, Request $request)
     {
+<<<<<<< HEAD
         $user = Users::findOrFail($id);
+=======
+        $user = User::findOrFail($id);
+>>>>>>> ad29c5174472ac8f41f377dd8d0d5cc5d2ab34c1
 
         $rules = [
             'username' => 'required',
@@ -76,7 +103,11 @@ class UserController extends Controller
 
     public function updateUserPassword($id, Request $request)
     {
+<<<<<<< HEAD
         $user = Users::findOrFail($id);
+=======
+        $user = User::findOrFail($id);
+>>>>>>> ad29c5174472ac8f41f377dd8d0d5cc5d2ab34c1
 
         $rules = [
             'password' => 'required|confirmed|min:8',
@@ -91,7 +122,11 @@ class UserController extends Controller
 
     public function deleteUser($id)
     {
+<<<<<<< HEAD
         Users::findOrFail($id)->delete();
+=======
+        User::findOrFail($id)->delete();
+>>>>>>> ad29c5174472ac8f41f377dd8d0d5cc5d2ab34c1
         return response('Supprimé.', 200);
     }
 }

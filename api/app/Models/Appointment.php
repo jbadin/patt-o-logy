@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 
-class HistorySubTypes extends Model
+class Appointment extends Model
 {
     use Authorizable, HasFactory;
 
@@ -16,7 +16,9 @@ class HistorySubTypes extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'title', 'description', 'datetime', 'dontForget', 'id_pets', 'id_historySubTypes'
+    ];
 
     /**
      * The attributes excluded from the model's JSON form.
