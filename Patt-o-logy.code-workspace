@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "api"
+		},
+		{
+			"path": "ressources"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "ressources"
+	}
+}
