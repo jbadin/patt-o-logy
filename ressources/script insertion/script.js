@@ -7,18 +7,6 @@ fetch('data.json')
         let speciesMedication = [];
         let speciesObject = [];
         let medications = [];
-        let speciesByCategories = [];
-        let category;
-
-        // let petCategories = {
-        //     'name' : 'Chien',
-        //     'Chat',
-        //     'NAC',
-        //     'Animaux de ferme',
-        //     'Animaux basse-cour',
-        //     'Chevaux',
-        //     'Autres'
-        // };
 
         data.map((item, index) => {
 
@@ -31,7 +19,6 @@ fetch('data.json')
                     speciesList.push(temporarySpeciesList[i]);
                 }
 
-                // category = category == '' ? 'mkllk' : ''; 
                 if (item.species == "") {
                     speciesMedication.push({
                         'id_medications': parseInt(index) + 1,
@@ -66,5 +53,4 @@ fetch('data.json')
             });
         })
 
-        console.log(speciesList);
     })
